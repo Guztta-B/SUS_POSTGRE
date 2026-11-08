@@ -1,11 +1,10 @@
-
 <?php
 
-$host = "aws-0-us-east-1.pooler.supabase.com";
-$port = "5432";
-$db_name = "postgres";
-$username = "postgres.fbeqawwswkygqxsoavys";
-$password = "Davi@2014GUGABONA2007";
+$host = getenv('DB_HOST');
+$port = getenv('DB_PORT');
+$db_name = getenv('DB_NAME');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
 
 try {
     $conn = new PDO(
@@ -21,9 +20,7 @@ try {
 
 } catch (PDOException $exception) {
     error_log("Erro de conexão: " . $exception->getMessage());
-
     http_response_code(500);
-    echo "Erro ao conectar ao banco de dados.";
-    exit();
+    exit("Erro ao conectar ao banco de dados.");
 }
 ?>
